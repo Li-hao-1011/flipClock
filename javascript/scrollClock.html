@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>滚动时钟</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+        list-style: none;
+        vertical-align: middle;
+      }
+      body {
+        background: #000;
+        color: #333;
+        font-size: 36px;
+      }
+      ul {
+        width: 36px;
+        position: absolute;
+        transition: all 0.75s;
+      }
+      div {
+        width: 36px;
+        position: absolute;
+        color: #ffffff;
+        top: 36px;
+      }
+      .scroll-clock {
+        width: 290px;
+        margin: 100px auto;
+        position: relative;
+        height: 108px;
+        overflow: hidden;
+      }
+      li {
+        height: 36px;
+      }
+      li.active {
+        color: #fff;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="scroll-clock">
+      <ul style="left: 0">
+        <li>0</li>
+        <li>1</li>
+        <li>2</li>
+      </ul>
+      <ul style="left: 36px">
+        <li>0</li>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+        <li>7</li>
+        <li>8</li>
+        <li>9</li>
+      </ul>
+      <div style="left: 72px">
+        <p>:</p>
+      </div>
+      <ul style="left: 108px">
+        <li>0</li>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+      </ul>
+      <ul style="left: 144px">
+        <li>0</li>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+        <li>7</li>
+        <li>8</li>
+        <li>9</li>
+      </ul>
+      <div style="left: 180px">
+        <p>:</p>
+      </div>
+      <ul style="left: 216px">
+        <li>0</li>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+      </ul>
+      <ul style="left: 252px">
+        <li>0</li>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+        <li>7</li>
+        <li>8</li>
+        <li>9</li>
+      </ul>
+    </nav>
+
+    <script>
+      time();
+      setInterval(time, 1000);
+
+      function time() {
+        var Nowtime = new Date();
+        var h = Nowtime.getHours();
+        if (h < 10) h = "0" + h;
+        var m = Nowtime.getMinutes();
+        if (m < 10) m = "0" + m;
+        var s = Nowtime.getSeconds();
+        if (s < 10) s = "0" + s;
+        //获得字符串时间
+        var str = "" + h + m + s;
+        var ul = document.getElementsByTagName("ul");
+        var li = document.getElementsByTagName("li");
+        //灰掉所有li
+        for (var i = 0; i < li.length; i++) {
+          li[i].className = "";
+        }
+        //字符串时间与每个ul关联
+        for (var i = 0; i < ul.length; i++) {
+          //
+          ul[i].style.top = (parseInt(str[i]) - 1) * -36 + "px";
+          //当前li样式激活
+          ul[i].getElementsByTagName("li")[str[i]].className = "active";
+        }
+        // console.log(str)
+      }
+    </script>
+  </body>
+</html>
